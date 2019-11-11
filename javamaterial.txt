@@ -1,0 +1,31 @@
+Event Codes:
+
+1001
+1002
+1003
+1004
+Processing Sub Status:
+RCD / ROU001
+UTRG/ROU002
+UTRG/ROU003
+
+Transaction Status
+
+RCVD
+ACSP
+ACSP/RJCT
+TECX
+
+Exception Codes
+
+UT01---
+FF01---lib message parser
+DS09----lib derivation
+
+MSGID:
+
+HK-DEMO-190122004
+
+CreatedTime:
+
+2019-02-05 04:03:04

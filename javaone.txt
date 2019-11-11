@@ -1,0 +1,77 @@
+Transaction Lifecycle is defined to handle technical/timeout exceptions that are being encountered during transaction processing within SCPAY.
+
+When ever there a technical/timeout exception encountered while processing the transaction with in the SCPAY, an event is generated and payload will be filled with all event status code details and pushed to the Event Bus handler.
+
+The Event Bus listerner service will persist all these payload messages in to the database and later Replay service will attempt to replay these failed transactions(technically/timeout) periodically based on the configurable duration.
+
+
+  Configuration:
+  
+    maven:
+	
+	msg:	
+	
+	datasource:
+	
+	
+	queries.
+
+
+The Replay Service performs the below operations.
+
+  1. reply transaction by exceptions.
+  
+  2. reply transaction by timeouts.
+  
+  event is nothing but end-to-end transaction reference id or message id
+  
+  Event Codes:
+
+1001
+1002
+1003
+1004
+Processing Sub Status:
+RCD / ROU001
+UTRG/ROU002
+UTRG/ROU003
+
+Transaction Status
+
+RCVD
+ACSP
+ACSP/RJCT
+TECX
+
+Exception Codes
+
+UT01---
+FF01---lib message parser
+DS09----lib derivation
+
+MSGID:
+
+HK-DEMO-190122004
+
+CreatedTime:
+
+2019-02-05 04:03:04
+
+
+  
+  
+  
+selecttimeoutreplayreq.sql: select isreplay from mplc_replay where prdcd=? and svcnm=? and txevtcd=? and prcgsubsts=? and txsts=? and timeoutflag=? and isreplay='Y'
+
+SVNAME                  SUBSVCNAME              TXEVTCD
+Accounting Generation	duplicateCheckService	 4999    
+Processor	        derivationService	 3003	
+	
+  Adapter                                         2999
+  Processor	       duplicateCheckService	  3999
+
+the main agenda of this meeting is need to present our componet to scarf
+
+
+How to transaction life cycle knows once clearing posted message?
+
